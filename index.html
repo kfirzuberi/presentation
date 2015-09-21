@@ -11,15 +11,15 @@
 <body>
 
 <div class="com" ng-controller="mainCtrl">
-    <div class="com__content">
 
+    <!--Contents-->
+    <div class="com__content">
         <div ng-repeat="content in contents">
             <section ng-if="!content.isHalf" class="{{content.content_class}}" >
                 <h1 class="{{content.title.class}}">{{content.title.content}}</h1>
                 <img ng-if="content.image" class="{{content.image.class}}" ng-src="{{content.image.src}}" alt="" />
                 <p ng-if="content.content" class="{{content.content.class}}">{{content.content.content}}</p>
             </section>
-
             <section ng-if="content.isHalf" class="{{content.content_class}}" >
                 <div class="com__section-half">
                     <h1 ng-if="content.content.sideA.title" class="{{content.content.sideA.title.class}}">{{content.content.sideA.title.content}}</h1>
@@ -34,6 +34,8 @@
             </section>
         </div>
     </div>
+
+    <!--navs-->
     <nav class="com__nav">
         <ul class="com__nav-list">
             <li class="com__nav-item" ng-repeat="content in contents">
