@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,144 +9,56 @@
     <!-- <link rel="stylesheet" href="/css/global.css"> -->
     <link rel="stylesheet" href="css/style.css">
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-59618007-1', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-    <!--[if lt IE 9]>
-    <script src="js/vendor/selectivizr-1.0.2.min.js"></script>
-    <script src="js/vendor/respond-1.4.2.min.js"></script>
-    <![endif]-->
     <style>
         .header {
             background: #2B2B2B;
         }
     </style>
+
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
-<!--[if IE]>
-<div class="browsehappy">
-    <p>
-        You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience.
-    </p>
-</div>
-<![endif]-->
 
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 
-<div class="com">
+<div class="com" ng-controller="mainCtrl">
     <div class="com__content">
 
-        <section class="com__section com__section--text centered">
-            <h1 class="animate scaleIn">Communication Design</h1>
-            <img class="animate scaleIn delay-3" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/ettrics-logo.svg" alt="" />
-        </section>
+        <div ng-repeat="content in contents">
+            <section ng-if="!content.isHalf" class="{{content.content_class}}" >
+                <h1 class="{{content.title.class}}">{{content.title.content}}</h1>
+                <img ng-if="content.image" class="{{content.image.class}}" ng-src="{{content.image.src}}" alt="" />
+                <p ng-if="content.content" class="{{content.content.class}}">{{content.content.content}}</p>
+            </section>
 
-        <section class="com__section com__section--text">
-            <h1 class="animate slideInLeft ">ככפיר צוברי</h1>
-            <p class="animate slideInLeft delay-3">Communication design is a mixed discipline between design and information-development which is concerned with how media intermission such as printed, crafted, electronic media or presentations communicate with people.</p>
-        </section>
-
-        <section class="com__section com__section--text com__section--text-img">
-            <div class="com__section-half">
-                <h1 class="animate slideInLeft">Communication Design</h1>
-                <p class="animate slideInLeft delay-2">Communication design is a mixed discipline between design and information-development which is concerned with how media intermission such as printed, crafted, electronic media or presentations communicate with people.</p>
-            </div>
-            <div class="com__section-half">
-                <img class="animate slideInRight delay-3" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/ettrics-logo.svg" alt="" />
-            </div>
-        </section>
-
-        <section class="com__section com__section--text centered">
-            <h1 class="animate scaleIn">Communication Design</h1>
-            <img class="animate scaleIn delay-3" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/ettrics-logo.svg" alt="" />
-        </section>
-
-        <section class="com__section com__section--text">
-            <h1 class="animate slideInLeft ">Communication Design</h1>
-            <p class="animate slideInLeft delay-3">Communication design is a mixed discipline between design and information-development which is concerned with how media intermission such as printed, crafted, electronic media or presentations communicate with people.</p>
-        </section>
-
-        <section class="com__section com__section--text com__section--text-img">
-            <div class="com__section-half">
-                <h1 class="animate slideInLeft">Communication Design</h1>
-                <p class="animate slideInLeft delay-2">Communication design is a mixed discipline between design and information-development which is concerned with how media intermission such as printed, crafted, electronic media or presentations communicate with people.</p>
-            </div>
-            <div class="com__section-half">
-                <img class="animate slideInRight delay-3" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/ettrics-logo.svg" alt="" />
-            </div>
-        </section>
-
-
-
-        <section class="com__section com__section--text">
-            <h1 class="animate slideInLeft ">Communication Design</h1>
-            <p class="animate slideInLeft delay-3">Communication design is a mixed discipline between design and information-development which is concerned with how media intermission such as printed, crafted, electronic media or presentations communicate with people.</p>
-        </section>
+            <section ng-if="content.isHalf" class="{{content.content_class}}" >
+                <div class="com__section-half">
+                    <h1 ng-if="content.content.sideA.title" class="{{content.content.sideA.title.class}}">{{content.content.sideA.title.content}}</h1>
+                    <p ng-if="content.content.sideA.content" class="{{content.content.sideA.content.class}}">{{content.content.sideA.content.content}}</p>
+                    <img ng-if="content.content.sideA.image" class="{{content.content.sideA.image.class}}" ng-src="{{content.content.sideA.image.src}}" alt="" />
+                </div>
+                <div class="com__section-half">
+                    <h1 ng-if="content.content.sideB.title" class="{{content.content.sideB.title.class}}">{{content.content.sideB.title.content}}</h1>
+                    <p ng-if="content.content.sideB.content" class="{{content.content.sideB.content.class}}">{{content.content.sideB.content.content}}</p>
+                    <img ng-if="content.content.sideB.image" class="{{content.content.sideB.image.class}}" ng-src="{{content.content.sideB.image.src}}" alt="" />
+                </div>
+            </section>
+        </div>
     </div>
     <nav class="com__nav">
         <ul class="com__nav-list">
-            <li class="com__nav-item">
-                <a href="" class="com__nav-link centered">
-                    <span class="blue-line animate scaleIn delay-3"></span>
-                    <span class="white-circle animate scaleIn delay-5"></span>
+            <li class="com__nav-item" ng-repeat="content in contents">
+                <a ng-if="!content.isHalf" href="" class="{{content.nav.class}}">
+                    <span ng-repeat="thumb in content.nav.thumbs" class="{{thumb.class}}"></span>
                 </a>
-            </li>
-
-            <li class="com__nav-item">
-                <a href="" class="com__nav-link">
-                    <span class="blue-line animate scaleInLeft delay-2"></span>
-                    <span class="white-line animate scaleInLeft delay-4"></span>
-                    <span class="white-line animate scaleInLeft delay-5"></span>
-                </a>
-            </li>
-            <li class="com__nav-item">
-                <a href="" class="com__nav-link flex-row">
+                <a ng-if="content.isHalf" href="" class="{{content.nav.class}}">
                     <div class="com__section-half">
-                        <span class="blue-line animate scaleInLeft delay-3"></span>
-                        <span class="white-line animate scaleInLeft delay-4"></span>
+                        <span ng-repeat="thumb in content.nav.sideA.thumbs" class="{{thumb.class}}"></span>
                     </div>
                     <div class="com__section-half">
-                        <span class="white-circle animate slideInRight delay-5"></span>
+                        <span ng-repeat="thumb in content.nav.sideB.thumbs" class="{{thumb.class}}"></span>
                     </div>
-                </a>
-            </li>
-            <li class="com__nav-item">
-                <a href="" class="com__nav-link centered">
-                    <span class="blue-line animate scaleIn delay-3"></span>
-                    <span class="white-circle animate scaleIn delay-5"></span>
-                </a>
-            </li>
-            <li class="com__nav-item">
-                <a href="" class="com__nav-link">
-                    <span class="blue-line animate scaleInLeft delay-2"></span>
-                    <span class="white-line animate scaleInLeft delay-4"></span>
-                    <span class="white-line animate scaleInLeft delay-5"></span>
-                </a>
-            </li>
-            <li class="com__nav-item">
-                <a href="" class="com__nav-link flex-row">
-                    <div class="com__section-half">
-                        <span class="blue-line animate scaleInLeft delay-3"></span>
-                        <span class="white-line animate scaleInLeft delay-4"></span>
-                    </div>
-                    <div class="com__section-half">
-                        <span class="white-circle animate slideInRight delay-5"></span>
-                    </div>
-                </a>
-            </li>
-
-            <li class="com__nav-item">
-                <a href="" class="com__nav-link">
-                    <span class="blue-line animate scaleInLeft delay-2"></span>
-                    <span class="white-line animate scaleInLeft delay-4"></span>
-                    <span class="white-line animate scaleInLeft delay-5"></span>
                 </a>
             </li>
         </ul>
@@ -154,11 +66,6 @@
 </div>
 
 
-<!--
-<a class="back" href="/code/material-design-slider-animation/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 36 36" fill="white"><path d="M30 16.5H11.74l8.38-8.38L18 6 6 18l12 12 2.12-2.12-8.38-8.38H30v-3z"></path></svg> Back to article
-    <svg class="demo-logo" width="35" style="margin-left: 7px" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" viewBox="0 0 457.7 440.2" enable-background="new 0 0 457.718 440.164" xml:space="preserve"><defs><rect x="-71.1" y="-79.9" width="600" height="600"/></defs><clipPath><use overflow="visible"/></clipPath><g clip-path="url(#SVGID_2_)"><defs><rect x="-71.1" y="-79.9" width="600" height="600"/></defs><clipPath><use overflow="visible"/></clipPath><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="39.1" y="261.1" width="225.3" height="87.1"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="39.1" y="261.1" clip-path="url(#SVGID_6_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect y="141.8" width="233.5" height="202.9"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="4.1" y="199.7" transform="matrix(0.809 0.5878 -0.5878 0.809 165.2552 -22.1691)" clip-path="url(#SVGID_8_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="48.3" y="52.3" width="152.5" height="241.2"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="11.9" y="129.3" transform="matrix(0.309 0.9511 -0.9511 0.309 250.5018 1.0091)" clip-path="url(#SVGID_10_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="96" width="152.5" height="241.2"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="59.6" y="77" transform="matrix(-0.309 0.9511 -0.9511 -0.309 340.126 -5.9108)" clip-path="url(#SVGID_12_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="124.8" y="4.8" width="233.5" height="202.9"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="128.8" y="62.7" transform="matrix(-0.809 0.5878 -0.5878 -0.809 499.3647 50.3579)" clip-path="url(#SVGID_14_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="193.3" y="91.9" width="225.3" height="87.1"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="193.3" y="91.9" clip-path="url(#SVGID_16_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="224.2" y="95.5" width="233.5" height="202.9"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="228.3" y="153.4" transform="matrix(-0.809 -0.5878 0.5878 -0.809 501.0667 556.7014)" clip-path="url(#SVGID_18_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="256.9" y="146.7" width="152.5" height="241.2"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="220.5" y="223.7" transform="matrix(-0.309 -0.9511 0.9511 -0.309 181.9275 666.7085)" clip-path="url(#SVGID_20_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="209.3" y="199" width="152.5" height="241.2"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="172.9" y="276" transform="matrix(0.309 -0.9511 0.9511 0.309 -106.641 492.3453)" clip-path="url(#SVGID_22_)" fill="#FFFFFF" width="225.3" height="87.1"/></g><g opacity="0.8" clip-path="url(#SVGID_4_)"><defs><rect x="99.5" y="232.4" width="233.5" height="202.9"/></defs><clipPath><use overflow="visible"/></clipPath><rect x="103.6" y="290.3" transform="matrix(0.809 -0.5878 0.5878 0.809 -154.9439 190.8481)" clip-path="url(#SVGID_24_)" fill="#FFFFFF" width="225.3" height="87.1"/></g></g></svg>
-
-</a>-->
 <!--[if lt IE 9]>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
